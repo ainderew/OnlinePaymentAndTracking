@@ -18,19 +18,43 @@ $color_line: rgba(221, 221, 221, 0.705);
     display: grid;
     grid-template-rows: 3rem 3rem 1fr;
 
-    .div_searchbar,.div_headers{
+    .div_searchbar,
+    .div_headers {
         border-bottom: 1px solid $color_line;
     }
 }
 
-.div_center_main{
+.div_center_main {
     display: flex;
-    .center_left_categories,.center_right_items{
+    overflow: hidden;
+    .center_left_categories,
+    .center_right_items {
         width: 50%;
         height: 100%;
+        padding: 1rem;
     }
-    .center_left_categories{
+    .center_left_categories {
         border-right: 1px solid $color_line;
+        overflow: auto;
+    }
+}
+
+.grid_layout {
+    display: grid;
+
+    grid-auto-rows: 15rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+.container_category {
+    padding: 1rem;
+
+    .header_container {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: white;
+
+        text-transform: uppercase;
     }
 }
 
