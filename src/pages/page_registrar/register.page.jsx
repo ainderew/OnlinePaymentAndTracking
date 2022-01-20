@@ -1,21 +1,33 @@
 import React, {useEffect, useState} from "react";
 
-import {fetcher} from "../../scripts/fetcher";
-import {createCategoryContainer} from "../../scripts/DOM";
+import Component_Category_Container from "../../components/container_category/container_category.component"
+
+import {fetcherGET, fetcherPOST} from "../../scripts/fetcher";
+// import {createCategoryContainer} from "../../scripts/DOM";
 
 // STYLES IMPORT
 import "./register.style.scss";
 import "../../SCSS/global.style.scss"
 const Page_Register = () =>{
-    // const endpoint = "https://mysql-pos.herokuapp.com/categories"
+    
+    const [data, setData] = useState([]);
+    const [itemData, setItemData] = useState([]);
 
     useEffect(()=>{
-        fetcher(process.env.REACT_APP_ROUTE_GET_CATEGORIES,(data,index)=>{
-            createCategoryContainer(data,index)
+        fetcherGET(process.env.REACT_APP_ROUTE_GET_CATEGORIES,(fetchedData)=>{
+            setData(fetchedData)
         });
-
-        console.log(process.env.REACT_APP_ROUTE_GET_CATEGORIES)
+        
     },[])
+
+    const getItems = (categoryID) =>{
+        fetcherPOST(process.env.REACT_APP_ROUTE_GET_CATEGORIES_ITEMS,categoryID, (data) =>{
+            setItemData(data)
+        })
+    }
+
+
+
 
     return(
         <div className="container_main">
@@ -24,9 +36,13 @@ const Page_Register = () =>{
                 <div className="div_headers"></div>
                 <div className="div_center_main">
                     <div className="center_left_categories grid_layout">
-
+                        {data.map((el,index)=>{
+                            return <Component_Category_Container ParentData={el} index={index} getItemFetchFunction = {getItems} />
+                        })}
                     </div>
-                    <div className="center_right_items"></div>
+                    <div className="center_right_items">
+                        {console.log(itemData)};
+                    </div>
                 </div>
             </div>
             <div className="div_order"></div>

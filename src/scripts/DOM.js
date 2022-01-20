@@ -22,5 +22,5 @@ export const createCategoryContainer = (data,index) =>{
     element.style.backgroundColor = color;
 
     parentNode.appendChild(element);
-    console.log("done")
 }
+
