@@ -46,17 +46,7 @@ $color_line: rgba(221, 221, 221, 0.705);
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1rem;
 }
-.container_category {
-    padding: 1rem;
 
-    .header_container {
-        font-size: 1.3rem;
-        font-weight: bold;
-        color: white;
-
-        text-transform: uppercase;
-    }
-}
 
 .div_order {
     width: 40rem;
