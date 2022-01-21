@@ -2,6 +2,22 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.sub_text{
+    font-size: .8rem;
+    color: grey;
+}
+
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 $color_line: rgba(221, 221, 221, 0.705);

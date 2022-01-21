@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 
-import Component_Category_Container from "../../components/container_category/container_category.component"
+import COMPONENT_CONTAINER_CATEGORY from "../../components/container_category/container_category.component"
+import Component_Container_Item from "../../components/container_item/container_item.component";
 
 import {fetcherGET, fetcherPOST} from "../../scripts/fetcher";
 // import {createCategoryContainer} from "../../scripts/DOM";
@@ -33,15 +34,24 @@ const Page_Register = () =>{
         <div className="container_main">
             <div className="div_center">
                 <div className="div_searchbar"></div>
-                <div className="div_headers"></div>
+                <div className="div_headers">
+                    <div className="wrapper_left_header">
+                        <span className="span_header bold">Categories</span>
+                    </div>
+                    <div className="wrapper_right_header">
+                        <span className="span_header bold">Items</span>
+                    </div>
+                </div>
                 <div className="div_center_main">
                     <div className="center_left_categories grid_layout">
                         {data.map((el,index)=>{
-                            return <Component_Category_Container ParentData={el} index={index} getItemFetchFunction = {getItems} />
+                            return <COMPONENT_CONTAINER_CATEGORY ParentData={el} index={index} getItemFetchFunction = {getItems} />
                         })}
                     </div>
                     <div className="center_right_items">
-                        {console.log(itemData)};
+                        {itemData.map((el,index)=>{
+                            return <Component_Container_Item data={el} />
+                        })}
                     </div>
                 </div>
             </div>
