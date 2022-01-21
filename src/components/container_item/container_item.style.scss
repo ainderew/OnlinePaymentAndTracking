@@ -1,0 +1,28 @@
+.container_item {
+    // outline: 1px solid green;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 3rem 1fr 3rem;
+    gap: 1rem;
+
+    cursor: pointer;
+
+    .header_divider_brandbox {
+      background-color: #01acff;
+      .header_brand {
+        color: white;
+      }
+    }
+
+    .header_divider_center {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header_divider_price{
+        display: flex;
+        align-items: center;
+
+    }
+  }

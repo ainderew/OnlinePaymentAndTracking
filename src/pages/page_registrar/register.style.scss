@@ -24,6 +24,15 @@ $color_line: rgba(221, 221, 221, 0.705);
     }
 }
 
+.div_headers {
+    display: flex;
+    .wrapper_left_header,
+    .wrapper_right_header {
+        width: 50%;
+        padding: 1rem;
+    }
+}
+
 .div_center_main {
     display: flex;
     overflow: hidden;
@@ -37,6 +46,11 @@ $color_line: rgba(221, 221, 221, 0.705);
         border-right: 1px solid $color_line;
         overflow: auto;
     }
+    .center_right_items {
+        display: grid;
+        grid-auto-rows: 3rem;
+        gap: 1rem;
+    }
 }
 
 .grid_layout {
@@ -46,7 +60,6 @@ $color_line: rgba(221, 221, 221, 0.705);
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1rem;
 }
-
 
 .div_order {
     width: 40rem;

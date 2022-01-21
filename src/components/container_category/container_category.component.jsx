@@ -7,7 +7,7 @@ const getItems = () =>{
     
 }
 
-const Component_Category_Container = ({ParentData, index, getItemFetchFunction}) =>{
+const Component_Container_Category = ({ParentData, index, getItemFetchFunction}) =>{
     return(
         <div onClick={()=>{getItemFetchFunction(ParentData.id)}} style={{backgroundColor: getColor(index)}} className="container_category">
             <span className="header_container">{ParentData.name}</span>
@@ -15,4 +15,4 @@ const Component_Category_Container = ({ParentData, index, getItemFetchFunction})
     )
 }
 
-export default Component_Category_Container;
+export default Component_Container_Category;
