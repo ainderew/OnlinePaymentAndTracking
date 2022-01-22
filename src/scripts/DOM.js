@@ -1,26 +1,37 @@
 export const getColor = (counter) => {
-    const P_colors = ["#D3A885", "#EB8683", "#809DB1", "#46AABD", "#75B6FD"];
-  
-    const numberOfOptions = P_colors.length;
-    let result = counter;
-  
-    while (result > numberOfOptions - 1) {
-      result = result - numberOfOptions;
-    }
-  
-    return P_colors[result];
-  };
-  
+  const P_colors = ["#D3A885", "#EB8683", "#809DB1", "#46AABD", "#75B6FD"];
 
-export const createCategoryContainer = (data,index) =>{
-    let color = getColor(index)
-    const parentNode = document.querySelector(".center_left_categories");
-    
-    let element = document.createElement("div");
-    element.classList.add("container_category")
-    element.innerHTML = `<span class="header_container">${data.name}</span>`;
-    element.style.backgroundColor = color;
+  const numberOfOptions = P_colors.length;
+  let result = counter;
 
-    parentNode.appendChild(element);
+  while (result > numberOfOptions - 1) {
+    result = result - numberOfOptions;
+  }
+
+  return P_colors[result];
+};
+
+export const findRepeat = (orderArray, item) => {
+  let index = orderArray.findIndex(el => el.name === item.name);
+  return index;
+
+}
+
+export const getOrderPriceTotal = (dataSet) => {
+  let sum = 0;
+  dataSet.map(el => {
+    sum = sum + (el.price * el.orderQty)
+  })
+  return sum;
+}
+
+export const toCurrencyString = (number) => {
+  let formatter = new Intl.NumberFormat('en-US', {
+    style: "currency",
+    currency: "PHP"
+  })
+
+  return formatter.format(number)
+
 }
 
