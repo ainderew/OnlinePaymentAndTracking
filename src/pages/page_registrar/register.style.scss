@@ -63,4 +63,24 @@ $color_line: rgba(221, 221, 221, 0.705);
 
 .div_order {
     width: 40rem;
+    height: 100%;
+
+    display: grid;
+    grid-template-rows: 6rem 1fr 5rem;
+
+    .div_oder_header,.div_order_main,.div_order_button{
+
+    }
+
+    .div_order_main{
+        display: grid;
+        grid-template-rows: repeat(auto-fill, minmax(5rem, 1fr));
+        gap: 1rem;
+        
+    }
+
+    .div_order_button{
+        background-color: green;
+        color: white;
+    }
 }

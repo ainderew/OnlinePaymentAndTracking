@@ -2,9 +2,9 @@ import React from "react";
 import "./container_item.style.scss";
 
 
-const Component_Container_Item = ({data}) => {
+const Component_Container_Item = ({data,addItemToOrderFunction}) => {
     return (
-        <div className="container_item">
+        <div onClick={()=>{addItemToOrderFunction(data)}} className="container_item">
             <div className="header_divider_brandbox center">
                 <span className="header_brand bold">{data.brand}</span>
             </div>

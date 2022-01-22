@@ -1,0 +1,19 @@
+.container_order_item {
+    padding: 1rem;
+
+    display: grid;
+    grid-template-columns: 1fr 8rem;
+
+    font-size: 0.9rem;
+    cursor: pointer;
+
+    .wrapper_order_info {
+        display: grid;
+        grid-auto-rows: 1fr 1fr 1fr;
+    }
+
+    .wrapper_order_price {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
