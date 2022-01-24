@@ -19,7 +19,7 @@ export const findRepeat = (orderArray, item) => {
 
 export const getOrderPriceTotal = (dataSet) => {
   let sum = 0;
-  dataSet.map(el => {
+  dataSet.forEach(el => {
     sum = sum + (el.price * el.orderQty)
   })
   return sum;

@@ -1,0 +1,69 @@
+.div_receipt{
+    position: absolute;
+    right: 0px;
+    top: 0;
+    width: 180px;
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-size: 10px;
+
+}
+
+table{
+    border-spacing: none;
+}
+
+th{
+    font-weight: bold;
+    text-align: left;
+}
+
+.tbl_name{
+    width: 95px;
+}
+
+.tbl_quantity{
+    width: 25px;
+}
+.tbl_price{
+    width: 60px;
+}
+
+
+.span_note{
+    text-align: center;
+}
+
+.span_info{
+    margin-bottom: 1rem;
+    margin: 0rem .5rem;
+    font-size: 10px;
+}
+
+.img_logo{
+    width: inherit;
+    padding: 0rem 2rem;
+}
+.img_barcode{
+    width: inherit;
+    padding: .5rem 1rem;
+}
+.div_receipt_info,.div_cash_info{
+    width: 100%;
+    margin: 1rem 0;
+    padding: .5rem 0rem;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    
+}
+
+.row{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+}

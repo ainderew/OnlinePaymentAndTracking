@@ -2,7 +2,6 @@ import React from "react"
 import "./container_order_item.style.scss";
 
 const COMPONENT_CONTAINER_ORDER_ITEM = ({itemData}) => {
-    console.log(itemData)
     return (
         <div className="container_order_item">
             <div className="wrapper_order_info">
