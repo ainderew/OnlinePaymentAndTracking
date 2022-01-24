@@ -3,7 +3,7 @@ import "./side_menu.style.scss";
 
 const Component_SideMenu = () =>{
     return(
-        <div className="side_nav"></div>
+        <div className="side_nav print_hidden"></div>
     )
 }
 

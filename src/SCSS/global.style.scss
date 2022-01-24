@@ -5,6 +5,13 @@
     font-family: "Poppins", sans-serif;
 }
 
+.wrapper{
+    width: 100%;
+    min-height: 100%;
+}
+.blur{
+    background-color: rgba(0,0,0,0.2);
+}
 .bold{
     font-weight: bold;
 }
@@ -21,3 +28,9 @@
 }
 
 $color_line: rgba(221, 221, 221, 0.705);
+
+@media print{
+    .print_hidden{
+        display: none !important;
+    }
+}
