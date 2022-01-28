@@ -7,35 +7,32 @@ import PAGE_REGSITER from "../page_registrar/register.page"
 
 // COMPONENTS
 import COMPONENT_SIDEMENU from "../../components/side-menu/side_menu.component"
-import COMPONENT_PAYMENT_DETAILS from "../../components/payment_details/payment_details.components";
+import COMPONENT_BLUR from "../../components/blur/blur.component";
 
 const MainContainer = () => {
 
     const [blurFlag, setBlurFlag] = useState(false)
-    const [printFlag, setPrintFlag] = useState(false);
-    const [customerPayment, setCustomerpayment] = useState();
 
-    const toggleBlurFlag = () => {
+    
+
+    const toggleBlur= () => {
         setBlurFlag(prevState => !prevState);
+        console.log("blur was toggled");
     }
 
-    const togglePrintFlag = () => {
-        setPrintFlag(prevState => !prevState)
-    }
 
-    const getCustomerPayment = (payment) =>{
-        setCustomerpayment(payment);
-    }
+   
 
 
 
 
     return (
         <Router>
-            <COMPONENT_PAYMENT_DETAILS blurFlag={blurFlag} toggleBlurFlag={toggleBlurFlag} togglePrintFlag={togglePrintFlag} getCustomerPayment={getCustomerPayment} />
+            <COMPONENT_BLUR flag={blurFlag} />
+            
             <COMPONENT_SIDEMENU />
             <Routes>
-                <Route path='/' element={<PAGE_REGSITER toggleBlurFlag={toggleBlurFlag} printFlag={printFlag} togglePrintFlag={togglePrintFlag} customerPayment={customerPayment} />} />
+                <Route path='/' element={<PAGE_REGSITER toggleBlur={toggleBlur} />} />
             </Routes>
         </Router>
     )

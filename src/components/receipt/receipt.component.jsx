@@ -8,39 +8,40 @@ import logo from "../../assets/logo.svg";
 import bc from "../../assets/barcode.png";
 
 
-const COMPONENT_RECEIPT = ({ orderData, customerPayment, printFlag, hideReceipt, hidePaymentDetails, clearOrderData }) => {
+const COMPONENT_RECEIPT = ({ flag, orderData, customerPayment, toggleReceiptModal, closeAllModals, clearOrderData }) => {
 
     const [priceTotal, setPriceTotal] = useState(0)
-    
-    useEffect(()=>{
-        getPriceTotal(orderData);
-    },[orderData])
+
 
     useEffect(() => {
-        if (printFlag) {
+        getPriceTotal(orderData);
+    }, [orderData])
+
+    useEffect(() => {
+        if (flag) {
             setTimeout(() => {
                 printOut();
-                hideReceipt();
-                hidePaymentDetails();
+                closeAllModals();
                 clearOrderData();
             }, 500)
 
         }
-    }, [printFlag])
+    }, [flag])
+
 
     const printOut = () => {
         window.print()
     }
 
-    const getPriceTotal = (orderData) =>{
+    const getPriceTotal = (orderData) => {
         let sum = 0;
-        orderData.map(el => sum+=parseFloat(el.orderQty*el.price));
+        orderData.map(el => sum += parseFloat(el.orderQty * el.price));
         setPriceTotal(sum);
     }
 
 
     return (
-        (printFlag) ?
+        (flag) ?
             <div className="div_receipt">
                 <img src={logo} alt="logo" className="img_logo" />
                 <span className="span_info">6538 Libertad st.<br /> Palompon Leyte</span>
@@ -69,6 +70,7 @@ const COMPONENT_RECEIPT = ({ orderData, customerPayment, printFlag, hideReceipt,
                                 </tr>
                             )
                         })}
+                
                     </tbody>
                 </table>
 
@@ -86,6 +88,21 @@ const COMPONENT_RECEIPT = ({ orderData, customerPayment, printFlag, hideReceipt,
                         <div className="span_data">{toCurrencyString(customerPayment - priceTotal)}</div>
                     </div>
                 </div>
+
+                {/* <div className="div_cash_info">
+                    <div className="row">
+                        <div className="span_header bold">TOTAL</div>
+                        <div className="span_data">P1040</div>
+                    </div>
+                    <div className="row">
+                        <div className="span_header">Customer Cash</div>
+                        <div className="span_data">P1100</div>
+                    </div>
+                    <div className="row">
+                        <div className="span_header">Change</div>
+                        <div className="span_data">P60</div>
+                    </div>
+                </div> */}
                 <span className="span_note">Techpal thanks you for you purchase!</span>
             </div>
             : ""
