@@ -4,7 +4,9 @@ import COMPONENT_CONTAINER_CATEGORY from "../../components/container_category/co
 import COMPONENT_CONTAINER_ITEM from "../../components/container_item/container_item.component";
 import COMPONENT_CONTAINER_ORDER_ITEM from "../../components/container_order_item/container_order_item.component";
 import COMPONENT_RECEIPT from "../../components/receipt/receipt.component";
-// import COMPONENT_PAYMENT_DETAILS from "../../components/payment_details/payment_details.components";
+import COMPONENT_CONTAINER_CUSTOM_ORDER from "../../components/container_custom_order/container_custom_order.component";
+import COMPONENT_MODAL_PAYMENT_DETAILS from "../../components/modal_payment_details/modal_payment_details.components";
+import COMPONENT_MODAL_CUSTOM_ORDER from "../../components/modal_custom_order/modal_custom_order.component";
 
 import { fetcherGET, fetcherPOST } from "../../scripts/fetcher";
 import { findRepeat, getOrderPriceTotal, toCurrencyString } from "../../scripts/DOM";
@@ -15,14 +17,19 @@ import { Item } from "../../scripts/Item"
 import "./register.style.scss";
 import "../../SCSS/global.style.scss"
 
-const Page_Register = ({toggleBlurFlag, printFlag, togglePrintFlag,customerPayment}) => {
-// useStates
+const PAGE_REGISTER = ({ toggleBlur }) => {
+    // useStates
     const [data, setData] = useState([]);
     const [itemData, setItemData] = useState([]);
     const [orderData, setOrderData] = useState([]);
     const [orderdPriceTotal, setOrderPriceTotal] = useState(0);
 
-// useEffects
+    const [customerPayment, setCustomerpayment] = useState();
+    const [paymentFlag, setPaymentFlag] = useState(false);
+    const [printFlag, setPrintFlag] = useState(false);
+    const [customOrderFlag, setCustomOrderFlag] = useState(false);
+
+    // useEffects
     useEffect(() => {
         fetcherGET(process.env.REACT_APP_ROUTE_GET_CATEGORIES, (fetchedData) => {
             setData(fetchedData)
@@ -35,8 +42,8 @@ const Page_Register = ({toggleBlurFlag, printFlag, togglePrintFlag,customerPayme
         setOrderPriceTotal(toCurrencyString(PriceTotal));
     }, [orderData])
 
-    
-// Functions 
+
+    // Functions 
     const getItems = (categoryID) => {
         fetcherPOST(process.env.REACT_APP_ROUTE_GET_CATEGORIES_ITEMS, categoryID, (data) => {
             setItemData(data)
@@ -45,9 +52,10 @@ const Page_Register = ({toggleBlurFlag, printFlag, togglePrintFlag,customerPayme
 
     const addItemToOrder = (itemData) => {
         let indexOfRepeatedItem = findRepeat(orderData, itemData)
+        console.log(orderData);
 
         if (indexOfRepeatedItem === -1) {
-            let item = new Item(itemData.ID, itemData.name, itemData.brand, itemData.categoryID, itemData.price, itemData.stockQty, 1);
+            let item = new Item(itemData.ID, itemData.name, itemData.brand, itemData.categoryID, itemData.wholesalePrice, itemData.price, itemData.stockQty, 1);
             setOrderData((prevState) => [...prevState, item])
         } else {
             let prevArray = [...orderData]
@@ -59,17 +67,44 @@ const Page_Register = ({toggleBlurFlag, printFlag, togglePrintFlag,customerPayme
     }
 
 
-
-    const clearOrderData = () =>{
+    const clearOrderData = () => {
         setOrderData([])
     }
 
-    
+    const getCustomerPayment = (payment) => {
+        setCustomerpayment(payment);
+    }
+
+
+    const togglePaymentModal = () => {
+        toggleBlur();
+        setPaymentFlag(prevState => !prevState);
+    }
+
+    const toggleReceiptModal = () => {
+        setPrintFlag(prevState => !prevState)
+    }
+
+    const toggleCustomeOrderFlag = () => {
+        toggleBlur();
+        setCustomOrderFlag(prevState => !prevState)
+    }
+
+    const closeAllModal = () => {
+        toggleBlur();
+        setPaymentFlag(false);
+        setPrintFlag(false);
+    }
+
+
 
 
     return (
         <div className="wrapper">
-            <COMPONENT_RECEIPT orderData={orderData} customerPayment={customerPayment} printFlag={printFlag} hideReceipt={togglePrintFlag} hidePaymentDetails={toggleBlurFlag} clearOrderData={clearOrderData}/>
+            <COMPONENT_MODAL_CUSTOM_ORDER flag={customOrderFlag} toggleCustomeOrderFlag={toggleCustomeOrderFlag} addItemToOrder={addItemToOrder} />
+            <COMPONENT_MODAL_PAYMENT_DETAILS flag={paymentFlag} togglePaymentModal={togglePaymentModal} toggleReceiptModal={toggleReceiptModal} getCustomerPayment={getCustomerPayment} />
+
+            <COMPONENT_RECEIPT flag={printFlag} orderData={orderData} customerPayment={customerPayment} toggleBlur={toggleBlur} toggleReceiptModal={toggleReceiptModal} closeAllModals={closeAllModal} clearOrderData={clearOrderData} />
             <div className="container_main print_hidden">
                 <div className="div_center">
                     <div className="div_searchbar"></div>
@@ -83,10 +118,13 @@ const Page_Register = ({toggleBlurFlag, printFlag, togglePrintFlag,customerPayme
                     </div>
                     <div className="div_center_main">
                         <div className="center_left_categories grid_layout">
+                            <COMPONENT_CONTAINER_CUSTOM_ORDER toggleCustomeOrderFlag={toggleCustomeOrderFlag} toggleBlur={toggleBlur} />
+
                             {data.map((el, index) => {
                                 return <COMPONENT_CONTAINER_CATEGORY ParentData={el} index={index} getItemFetchFunction={getItems} />
                             })}
                         </div>
+
                         <div className="center_right_items">
                             {itemData.map((el, index) => {
                                 return <COMPONENT_CONTAINER_ITEM data={el} addItemToOrderFunction={addItemToOrder} />
@@ -101,7 +139,7 @@ const Page_Register = ({toggleBlurFlag, printFlag, togglePrintFlag,customerPayme
                             return < COMPONENT_CONTAINER_ORDER_ITEM itemData={el} />
                         })}
                     </div>
-                    <div onClick={() => toggleBlurFlag()} className="div_order_button center">
+                    <div onClick={togglePaymentModal} className="div_order_button center">
                         <span className="span_order_total">{orderdPriceTotal}</span>
                     </div>
                 </div>
@@ -110,4 +148,4 @@ const Page_Register = ({toggleBlurFlag, printFlag, togglePrintFlag,customerPayme
     )
 }
 
-export default Page_Register;
+export default PAGE_REGISTER;

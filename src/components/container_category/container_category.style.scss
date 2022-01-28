@@ -1,11 +1,17 @@
 .container_category {
     padding: 1rem;
 
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     .header_container {
         font-size: 1.3rem;
-        font-weight: bold;
+        font-weight: 600;
         color: white;
 
         text-transform: uppercase;
     }
+
 }

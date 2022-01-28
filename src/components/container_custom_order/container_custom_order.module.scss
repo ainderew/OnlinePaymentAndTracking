@@ -1,0 +1,17 @@
+.div_custom_container{
+    padding: 1rem;
+    background: black;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.span_header,.span_details{
+    color: white;
+}
+
+.span_header{
+    font-weight: 600;
+    font-size: 1.3rem;
+}
