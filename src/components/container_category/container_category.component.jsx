@@ -16,3 +16,7 @@ const Component_Container_Category = ({ ParentData, index, getItemFetchFunction 
 }
 
 export default Component_Container_Category;
+
+// TO DOs
+// span_details - display actual number of items in category
+// get rid of index and get color import
