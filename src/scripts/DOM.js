@@ -35,3 +35,19 @@ export const toCurrencyString = (number) => {
 
 }
 
+
+export const getDateAndTime = () => {
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  const d = new Date();
+  const monthName = months[d.getMonth()];
+  const day = d.getDate();
+  const year = d.getFullYear();
+  const hour = d.getHours();
+  const min =  d.getMinutes();
+
+  return `${monthName} ${day}, ${year} ${hour}:${min}`;
+  
+
+
+
+}

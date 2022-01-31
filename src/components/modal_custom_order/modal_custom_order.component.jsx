@@ -63,7 +63,7 @@ const COMPONENT_MODAL_CUSTOM_ORDER = ({ flag, toggleCustomeOrderFlag, addItemToO
     return (
         (flag)
             ?
-            <div className={Styles.div_modal_custom_order}>
+            <div className={`${Styles.div_modal_custom_order} print_hidden`}>
                 <div className={Styles.row}>
                     <input onChange={(e) => setValue(e, setItemName)} name="item name" type="text" id="input_name" className={Styles.input} placeholder="Item Name" value={itemName} />
                 </div>
