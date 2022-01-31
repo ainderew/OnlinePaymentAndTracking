@@ -16,7 +16,7 @@ const COMPONENT_PAYMENT_DETAILS = ({ flag, togglePaymentModal, toggleReceiptModa
 
     return (
         (flag) ?
-            <div className="div_payment_details">
+            <div className="div_payment_details print_hidden">
                 <div className="payment_details_row">
                     <label htmlFor="customer_payment" className="label_customer_payment">Customer Payment Amount</label>
                     <input onKeyDown={buttonActions} onChange={(e) => setAmount(e.target.value)} name="customer_payment" autoFocus={true} type="text" placeholder="Customer Payment" className="input_payment_details" />

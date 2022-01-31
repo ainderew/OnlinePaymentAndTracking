@@ -12,12 +12,17 @@ import COMPONENT_BLUR from "../../components/blur/blur.component";
 const MainContainer = () => {
 
     const [blurFlag, setBlurFlag] = useState(false)
+    const [loadingFlag, setLoadingFlag] = useState(false);
+
+
+    const toggleLoadingFlag = () =>{
+        setLoadingFlag(prevState => !prevState);
+    }
 
     
 
     const toggleBlur= () => {
         setBlurFlag(prevState => !prevState);
-        console.log("blur was toggled");
     }
 
 
@@ -32,7 +37,7 @@ const MainContainer = () => {
             
             <COMPONENT_SIDEMENU />
             <Routes>
-                <Route path='/' element={<PAGE_REGSITER toggleBlur={toggleBlur} />} />
+                <Route path='/' element={<PAGE_REGSITER toggleBlur={toggleBlur} loadingFlag={loadingFlag} toggleLoadingFlag={toggleLoadingFlag} />} />
             </Routes>
         </Router>
     )

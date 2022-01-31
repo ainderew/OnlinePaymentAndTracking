@@ -34,11 +34,12 @@ $color_line: rgba(221, 221, 221, 0.705);
 }
 
 .div_center_main {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     overflow: hidden;
     .center_left_categories,
     .center_right_items {
-        width: 50%;
+        width: 100%;
         height: 100%;
         padding: 1rem;
     }

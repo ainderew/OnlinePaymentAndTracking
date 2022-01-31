@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./receipt.style.scss";
 
-import { toCurrencyString } from "../../scripts/DOM";
+import { toCurrencyString, getDateAndTime } from "../../scripts/DOM";
 
 // IMAGES
 import logo from "../../assets/logo.svg";
@@ -39,15 +39,16 @@ const COMPONENT_RECEIPT = ({ flag, orderData, customerPayment, toggleReceiptModa
         setPriceTotal(sum);
     }
 
+    
+
 
     return (
         (flag) ?
             <div className="div_receipt">
                 <img src={logo} alt="logo" className="img_logo" />
                 <span className="span_info">6538 Libertad st.<br /> Palompon Leyte</span>
-
                 <div className="div_receipt_info">
-                    <span className="span_date">Date: 01/21/2022 7:25</span>
+                    <span className="span_date">{getDateAndTime()}</span>
                     <img src={bc} alt="" className="img_barcode" />
 
                 </div>
