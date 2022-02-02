@@ -173,8 +173,6 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
                                 })}
                             </div>
                         }
-
-
                     </div>
                 </div>
                 <div className="div_order">
