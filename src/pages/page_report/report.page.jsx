@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import Styles from "./report.module.scss";
 
 import { fetcherGET } from "../../scripts/fetcher";
+import { toCurrencyString } from "../../scripts/DOM";
 
 import COMPONENT_SEARCHBAR from "../../components/searchbar/searchbar.component";
 
 const PAGE_REPORT = () => {
   const [mode, setMode] = useState(["viewAllOrders"]);
   const [dataSet, setDataSet] = useState([]);
+  const [rowData, setRowData] = useState([]);
   const [profit, setProfit] = useState();
   const [revenue, setRevenue] = useState();
 
@@ -56,6 +58,11 @@ const PAGE_REPORT = () => {
     setProfit(totalProfit);
   };
 
+  const getTableRowData = (index) =>{
+    setRowData(dataSet[index]);
+    console.log(rowData);
+  }
+
   return (
     <div className={Styles.div_main}>
       <div className={Styles.div_searchbar}>
@@ -70,7 +77,7 @@ const PAGE_REPORT = () => {
             <div className={Styles.div_financial_report}>
               <div className={Styles.div_revenue}>
                 <span className={Styles.span_sub_header}>Revenue</span>
-                <span className={Styles.span_amount}>PHP {revenue}</span>
+                <span className={Styles.span_amount}>{toCurrencyString(revenue)}</span>
                 <span className={Styles.span_subtext}>
                   <span className={Styles.span_change_indicator_up}>up 5%</span>{" "}
                   vs last month
@@ -78,7 +85,7 @@ const PAGE_REPORT = () => {
               </div>
               <div className={Styles.div_profit}>
                 <span className={Styles.span_sub_header}>Profit</span>
-                <span className={Styles.span_amount}>PHP {profit}</span>
+                <span className={Styles.span_amount}>{toCurrencyString(profit)}</span>
                 <span className={Styles.span_subtext}>
                   <span className={Styles.span_change_indicator_up}>up 5%</span>{" "}
                   vs last month
@@ -91,7 +98,7 @@ const PAGE_REPORT = () => {
             <table className={Styles.table}>
               <thead className={Styles.table_header}>
                 <tr>
-                  <th>Order ID</th>
+                  <th className={Styles.table_col_orderID} >Order ID</th>
                   <th>Date</th>
                   <th>Total Revenue</th>
                   <th>Profit</th>
@@ -99,17 +106,17 @@ const PAGE_REPORT = () => {
               </thead>
 
               <tbody>
-                {dataSet.map((order) => {
+                {dataSet.map((order,index) => {
                   let businessData = calculateRevenueAndProfit(order);
                   let orderID = order[0].orderID; //all of the items inside the order array have the same orderID so we just get the first items orderID
                   let date = order[0].date;
 
                   return (
-                    <tr>
-                      <td>{orderID}</td>
+                    <tr onClick={()=>getTableRowData(index)} className={Styles.table_row}>
+                      <td className={Styles.table_col_orderID}>{orderID}</td>
                       <td>{date}</td>
-                      <td>{businessData.revenue}</td>
-                      <td>{businessData.profit}</td>
+                      <td>{toCurrencyString(businessData.revenue)}</td>
+                      <td>{toCurrencyString(businessData.profit)}</td>
                     </tr>
                   );
                 })}
@@ -120,6 +127,9 @@ const PAGE_REPORT = () => {
 
         <div className={Styles.div_right}>
           {/* this here will be statistic that relate to the data on the left */}
+          {rowData.map(el =>{
+              return <span className={Styles.span_header}>{el.name}</span>
+          })}
         </div>
       </div>
     </div>

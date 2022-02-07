@@ -1,5 +1,6 @@
 // @import "../../SCSS/global.style.scss";
-$color_line: rgba(221, 221, 221, 0.705);
+@import "../../SCSS/variables_colors";
+// $color_line: rgba(221, 221, 221, 0.705);
 .side_nav{
     min-height: 100vh;
     width: 4rem;
