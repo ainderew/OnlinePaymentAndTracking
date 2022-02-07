@@ -68,7 +68,6 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
 
     const addItemToOrder = (itemData) => {
         let indexOfRepeatedItem = findRepeat(orderData, itemData)
-        console.log(orderData);
 
         if (indexOfRepeatedItem === -1) {
             let item = new Item(itemData.ID, itemData.name, itemData.brand, itemData.categoryID, itemData.wholesalePrice, itemData.price, itemData.stockQty, 1);
@@ -77,11 +76,8 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
             let prevArray = [...orderData]
             prevArray[indexOfRepeatedItem].orderQty += 1
             setOrderData(prevArray);
-
         }
-
     }
-
 
     const clearOrderData = () => {
         setOrderData([])
@@ -90,7 +86,6 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
     const getCustomerPayment = (payment) => {
         setCustomerpayment(payment);
     }
-
 
     const togglePaymentModal = () => {
         toggleBlur();
@@ -110,12 +105,17 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
         setCategoryLoadingFlag(prevState => !prevState)
     }
 
-
-
     const closeAllModal = () => {
         toggleBlur();
         setPaymentFlag(false);
         setPrintFlag(false);
+    }
+
+    const pushOrderTodDB = (orderData) =>{
+        console.log(orderData);
+        fetcherPOST(process.env.REACT_APP_ROUTE_UPLOAD_ORDERS, orderData, (response) =>{
+            console.log(response)
+        })
     }
 
 
@@ -126,7 +126,7 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
             <COMPONENT_MODAL_CUSTOM_ORDER flag={customOrderFlag} toggleCustomeOrderFlag={toggleCustomeOrderFlag} addItemToOrder={addItemToOrder} />
             <COMPONENT_MODAL_PAYMENT_DETAILS flag={paymentFlag} togglePaymentModal={togglePaymentModal} toggleReceiptModal={toggleReceiptModal} getCustomerPayment={getCustomerPayment} />
 
-            <COMPONENT_RECEIPT flag={printFlag} orderData={orderData} customerPayment={customerPayment} toggleBlur={toggleBlur} toggleReceiptModal={toggleReceiptModal} closeAllModals={closeAllModal} clearOrderData={clearOrderData} />
+            <COMPONENT_RECEIPT flag={printFlag} orderData={orderData} pushOrderTodDB={pushOrderTodDB} customerPayment={customerPayment} toggleBlur={toggleBlur} closeAllModals={closeAllModal} clearOrderData={clearOrderData} />
             <div className="container_main print_hidden">
                 <div className="div_center">
                     <div className="div_searchbar">
@@ -173,8 +173,6 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
                                 })}
                             </div>
                         }
-
-
                     </div>
                 </div>
                 <div className="div_order">

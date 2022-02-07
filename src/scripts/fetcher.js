@@ -10,9 +10,12 @@ export const fetcherGET = (ENDPOINT,cbFunction) =>{
     .then(data => cbFunction(data))
 }
 
-export const fetcherPOST = (endpoint,categoryID,cb) =>{
+export const fetcherPOST = (endpoint,data,cb) =>{
     
-    const objData = {categoryID: categoryID.toString()};
+    // const objData = {categoryID: categoryID.toString()};
+    const objData ={data: data}
+    
+
     fetch(endpoint,{
         method: "POST",
         mode: "cors",

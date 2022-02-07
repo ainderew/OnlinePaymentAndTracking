@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 // PAGES
 import PAGE_REGSITER from "../page_registrar/register.page"
+import PAGE_REPORT from "../page_report/report.page"
 
 // COMPONENTS
 import COMPONENT_SIDEMENU from "../../components/side-menu/side_menu.component"
@@ -38,6 +39,8 @@ const MainContainer = () => {
             <COMPONENT_SIDEMENU />
             <Routes>
                 <Route path='/' element={<PAGE_REGSITER toggleBlur={toggleBlur} loadingFlag={loadingFlag} toggleLoadingFlag={toggleLoadingFlag} />} />
+                <Route path='/report' element={<PAGE_REPORT/>} />
+
             </Routes>
         </Router>
     )

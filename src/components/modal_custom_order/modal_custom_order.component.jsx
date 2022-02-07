@@ -25,7 +25,7 @@ const COMPONENT_MODAL_CUSTOM_ORDER = ({ flag, toggleCustomeOrderFlag, addItemToO
             },2000)
 
         } else {
-            const customItem = new Item(0, itemName, brand, 0, wholesalePrice, price, 0, orderQuantity)
+            const customItem = new Item(0, itemName, brand, 145, wholesalePrice, price, 0, orderQuantity)
             addItemToOrder(customItem);
             clearValues();
         }

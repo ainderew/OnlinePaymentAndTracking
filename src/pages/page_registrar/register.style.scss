@@ -1,4 +1,4 @@
-$color_line: rgba(221, 221, 221, 0.705);
+@import "../../SCSS/variables_colors";
 
 .container_main {
     height: 100vh;
@@ -22,6 +22,10 @@ $color_line: rgba(221, 221, 221, 0.705);
     .div_headers {
         border-bottom: 1px solid $color_line;
     }
+}
+
+.div_searchbar{
+    padding: .5rem;
 }
 
 .div_headers {

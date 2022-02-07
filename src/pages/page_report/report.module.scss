@@ -1,0 +1,95 @@
+@import "../../SCSS/variables_colors";
+
+.div_main {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+
+  display: grid;
+  grid-template-rows: 3rem 1fr;
+}
+
+.div_searchbar {
+  border-bottom: 1px solid $color_line;
+
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 100%;
+  padding: 0.5rem;
+}
+
+.div_content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+
+  .div_left,
+  .div_right {
+    width: 100%;
+    height: 100%;
+  }
+  .div_left {
+    // background: red;
+    border-right: 1px solid $color_line;
+
+    display: grid;
+    grid-template-rows: 15rem 1fr;
+  }
+}
+
+.div_summary {
+  // background: green;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .span_header {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  .span_subtext {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: rgba(128, 128, 128, 0.651);
+  }
+}
+.div_financial_report {
+  height: 50%;
+//   outline: 1px solid green;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  .div_revenue,.div_profit {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .span_sub_header {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .span_amount {
+    font-weight: 700;
+  }
+  .span_change_indicator_up{
+      color: rgb(0, 206, 0);
+  }
+}
+
+.div_table {
+  width: 100%;
+  height: 100%;
+
+  .table {
+    width: 100%;
+    // height: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .table_header {
+    background: rgb(233, 233, 233);
+  }
+  td,
+  th {
+    padding: 0 1rem;
+  }
+}

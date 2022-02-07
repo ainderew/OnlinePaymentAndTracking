@@ -8,7 +8,7 @@ import logo from "../../assets/logo.svg";
 import bc from "../../assets/barcode.png";
 
 
-const COMPONENT_RECEIPT = ({ flag, orderData, customerPayment, toggleReceiptModal, closeAllModals, clearOrderData }) => {
+const COMPONENT_RECEIPT = ({ flag, orderData, pushOrderTodDB, customerPayment, closeAllModals, clearOrderData }) => {
 
     const [priceTotal, setPriceTotal] = useState(0)
 
@@ -21,6 +21,7 @@ const COMPONENT_RECEIPT = ({ flag, orderData, customerPayment, toggleReceiptModa
         if (flag) {
             setTimeout(() => {
                 printOut();
+                pushOrderTodDB(orderData);
                 closeAllModals();
                 clearOrderData();
             }, 500)
