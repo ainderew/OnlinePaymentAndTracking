@@ -27,7 +27,7 @@ const COMPONENT_MODAL_ADD_ITEM_INFORMATION = ({ flag }) => {
     const submit = () =>{
         const data = {
             name: name,
-            quantity: quantity,
+            stockQty: quantity,
             wholesalePrice: wPrice,
             price: sPrice,
             brand: brand,

@@ -11,7 +11,7 @@ const Component_Container_Item = ({data,addItemToOrderFunction}) => {
 
             <div className="header_divider_center">
                 <span className="header_items">{data.name}</span>
-                <span className="header_items sub_text">Stock: 8</span>
+                <span className="header_items sub_text">Stock: {data.stockQty}</span>
             </div>
 
             <div className="header_divider_price center_vertical">
