@@ -10,10 +10,10 @@ export const fetcherGET = (ENDPOINT,cbFunction) =>{
     .then(data => cbFunction(data))
 }
 
-export const fetcherPOST = (endpoint,data,cb) =>{
+export const fetcherPOST = (endpoint,toPostData,cb) =>{
     
     // const objData = {categoryID: categoryID.toString()};
-    const objData ={data: data}
+    const objData ={data: toPostData}
     
 
     fetch(endpoint,{
