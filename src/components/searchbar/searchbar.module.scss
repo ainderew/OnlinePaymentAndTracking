@@ -11,4 +11,19 @@
     background-position: .9rem;
 
     background-color: rgba(241, 241, 241, 0.767);
+    animation: growRight 300ms linear forwards;
+}
+
+
+
+
+@keyframes growRight {
+    0%{
+        transform-origin: 0;
+        transform: scaleX(0%);
+    }
+    100%{
+        transform-origin: 0;
+        transform: scaleX(100%);
+    }
 }

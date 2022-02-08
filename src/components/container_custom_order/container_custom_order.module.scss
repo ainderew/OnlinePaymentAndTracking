@@ -1,6 +1,7 @@
+@import "../../SCSS/variables_colors";
 .div_custom_container{
     padding: 1rem;
-    background: black;
+    background: $primary;
 
     display: flex;
     flex-direction: column;

@@ -1,0 +1,94 @@
+@import "../../SCSS/variables_colors";
+.div_main {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.div_left,
+.div_right {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+
+  display: grid;
+  grid-template-rows: 3rem 1fr;
+}
+
+.div_top_bar {
+  padding: .5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  
+  .div_searchbar{
+      width: 80%;
+      height: 100%;
+  }
+  .div_buttons{
+    width: 18%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+   
+  .btn_search,.btn_refresh{
+      width: 2rem;
+      height: 100%;
+      border: none;
+      border-radius: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .btn_addItem{
+      border: none;
+      padding: 0 1rem;
+      font-size: .8rem;
+      color: white;
+      background-color: $primary;
+      border-radius: 1rem;
+  }
+  
+  .icon_search,.icon_refresh{
+      height: 45%;
+  }
+
+  
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .9rem;
+
+  .table_header {
+    height: 4rem;
+    // background-color: $color_line;
+    border-bottom: 1px solid $color_line_2;
+    color: rgba(128, 128, 128, 0.487);
+    
+  }
+  .table_row {
+    height: 3rem;
+    border-bottom: 1px solid $color_line_2;
+  }
+  .row_id{
+      width: 5%;
+  }
+  .row_name{
+      width: 30%;
+  }
+  .row_wPrice,.row_sPrice{
+      width: 25%;
+  }
+  .row_actions{
+      width: 15%;
+  }
+  th,td{
+    padding: 0 1rem;
+  }
+  
+}
+
