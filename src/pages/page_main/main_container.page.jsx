@@ -41,7 +41,7 @@ const MainContainer = () => {
             <Routes>
                 <Route path='/' element={<PAGE_REGSITER toggleBlur={toggleBlur} loadingFlag={loadingFlag} toggleLoadingFlag={toggleLoadingFlag} />} />
                 <Route path='/report' element={<PAGE_REPORT/>} />
-                <Route path='/inventory' element={<PAGE_INVENTORY toggleBlur={toggleBlur}/>} />
+                <Route path='/inventory' element={<PAGE_INVENTORY toggleBlur={toggleBlur} toggleLoadingFlag={toggleLoadingFlag} loadingFlag={loadingFlag}/>} />
             </Routes>
         </Router>
     )

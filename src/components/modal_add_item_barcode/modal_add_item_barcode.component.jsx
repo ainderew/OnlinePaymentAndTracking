@@ -4,13 +4,11 @@ import Styles from "./modal_add_item_barcode.module.scss";
 // IMAGES
 import IMG_barcode from "../../assets/read_barcode.svg"
 
-const COMPONENT_MODAL_ADD_ITEM_BARCODE = ({flag, toggleBarcodeFlag, toggleModalInfoFlag}) =>{
+const COMPONENT_MODAL_ADD_ITEM_BARCODE = ({flag, toggleBarcodeFlag, toggleModalInfoFlag,setBarcode}) =>{
 
-    const [barcode, setBarcode] = useState();
 
     const scanned = (e) =>{
         setBarcode(e.target.value);
-        console.log(barcode)
         toggleBarcodeFlag();
         toggleModalInfoFlag();
         
