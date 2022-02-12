@@ -111,7 +111,7 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
         setPrintFlag(false);
     }
 
-    const pushOrderTodDB = (orderData) =>{
+    const pushOrderToDB = (orderData) =>{
         console.log(orderData);
         fetcherPOST(process.env.REACT_APP_ROUTE_UPLOAD_ORDERS, orderData, (response) =>{
             console.log(response)
@@ -126,7 +126,7 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
             <COMPONENT_MODAL_CUSTOM_ORDER flag={customOrderFlag} toggleCustomeOrderFlag={toggleCustomeOrderFlag} addItemToOrder={addItemToOrder} />
             <COMPONENT_MODAL_PAYMENT_DETAILS flag={paymentFlag} togglePaymentModal={togglePaymentModal} toggleReceiptModal={toggleReceiptModal} getCustomerPayment={getCustomerPayment} />
 
-            <COMPONENT_RECEIPT flag={printFlag} orderData={orderData} pushOrderTodDB={pushOrderTodDB} customerPayment={customerPayment} toggleBlur={toggleBlur} closeAllModals={closeAllModal} clearOrderData={clearOrderData} />
+            <COMPONENT_RECEIPT flag={printFlag} orderData={orderData} pushOrderToDB={pushOrderToDB} customerPayment={customerPayment} toggleBlur={toggleBlur} closeAllModals={closeAllModal} clearOrderData={clearOrderData} />
             <div className="container_main print_hidden">
                 <div className="div_center">
                     <div className="div_searchbar">

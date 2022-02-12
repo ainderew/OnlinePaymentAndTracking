@@ -7,8 +7,11 @@ import { toCurrencyString, getDateAndTime } from "../../scripts/DOM";
 import logo from "../../assets/logo.svg";
 import bc from "../../assets/barcode.png";
 
+// COMPONENT
+import COMPONENT_BARCODE from "../barcode_generator/barcode_generator.component";
 
-const COMPONENT_RECEIPT = ({ flag, orderData, pushOrderTodDB, customerPayment, closeAllModals, clearOrderData }) => {
+
+const COMPONENT_RECEIPT = ({ flag, orderData, pushOrderToDB, customerPayment, closeAllModals, clearOrderData }) => {
 
     const [priceTotal, setPriceTotal] = useState(0)
 
@@ -21,7 +24,7 @@ const COMPONENT_RECEIPT = ({ flag, orderData, pushOrderTodDB, customerPayment, c
         if (flag) {
             setTimeout(() => {
                 printOut();
-                pushOrderTodDB(orderData);
+                pushOrderToDB(orderData);
                 closeAllModals();
                 clearOrderData();
             }, 500)
@@ -45,12 +48,14 @@ const COMPONENT_RECEIPT = ({ flag, orderData, pushOrderTodDB, customerPayment, c
 
     return (
         (flag) ?
+        // (true) ?
             <div className="div_receipt">
                 <img src={logo} alt="logo" className="img_logo" />
                 <span className="span_info">6538 Libertad st.<br /> Palompon Leyte</span>
                 <div className="div_receipt_info">
                     <span className="span_date">{getDateAndTime()}</span>
-                    <img src={bc} alt="" className="img_barcode" />
+                    {/* <img src={bc} alt="" className="img_barcode" /> */}
+                    <COMPONENT_BARCODE />
 
                 </div>
                 <table className="table">
