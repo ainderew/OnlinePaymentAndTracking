@@ -11,21 +11,20 @@ import bc from "../../assets/barcode.png";
 import COMPONENT_BARCODE from "../barcode_generator/barcode_generator.component";
 
 
-const COMPONENT_RECEIPT = ({ flag, orderData, pushOrderToDB, customerPayment, closeAllModals, clearOrderData }) => {
+const COMPONENT_RECEIPT = ({ flag, orderData, pushOrderToDB, customerPayment, closeAllModals, clearOrderData, orderPriceTotal, barcodeID }) => {
 
-    const [priceTotal, setPriceTotal] = useState(0)
+    // const [priceTotal, setPriceTotal] = useState(0)
 
 
-    useEffect(() => {
-        getPriceTotal(orderData);
-    }, [orderData])
+    // useEffect(() => {
+    //     getPriceTotal(orderData);
+    // }, [orderData])
 
     useEffect(() => {
         if (flag) {
             setTimeout(() => {
-                printOut();
-                pushOrderToDB(orderData);
-                closeAllModals();
+                // printOut();
+                // closeAllModals();
                 clearOrderData();
             }, 500)
 
@@ -37,17 +36,17 @@ const COMPONENT_RECEIPT = ({ flag, orderData, pushOrderToDB, customerPayment, cl
         window.print()
     }
 
-    const getPriceTotal = (orderData) => {
-        let sum = 0;
-        orderData.map(el => sum += parseFloat(el.orderQty * el.price));
-        setPriceTotal(sum);
-    }
+    // const getPriceTotal = (orderData) => {
+    //     let sum = 0;
+    //     orderData.map(el => sum += parseFloat(el.orderQty * el.price));
+    //     setPriceTotal(sum);
+    // }
 
     
 
 
     return (
-        (flag) ?
+        (true) ?
         // (true) ?
             <div className="div_receipt">
                 <img src={logo} alt="logo" className="img_logo" />
@@ -55,7 +54,7 @@ const COMPONENT_RECEIPT = ({ flag, orderData, pushOrderToDB, customerPayment, cl
                 <div className="div_receipt_info">
                     <span className="span_date">{getDateAndTime()}</span>
                     {/* <img src={bc} alt="" className="img_barcode" /> */}
-                    <COMPONENT_BARCODE />
+                    <COMPONENT_BARCODE barcodeID = {barcodeID} />
 
                 </div>
                 <table className="table">
@@ -84,7 +83,7 @@ const COMPONENT_RECEIPT = ({ flag, orderData, pushOrderToDB, customerPayment, cl
                 <div className="div_cash_info">
                     <div className="row">
                         <div className="span_header bold">TOTAL</div>
-                        <div className="span_data">{toCurrencyString(priceTotal)}</div>
+                        <div className="span_data">{toCurrencyString(orderPriceTotal)}</div>
                     </div>
                     <div className="row">
                         <div className="span_header">Customer Cash</div>
@@ -92,7 +91,7 @@ const COMPONENT_RECEIPT = ({ flag, orderData, pushOrderToDB, customerPayment, cl
                     </div>
                     <div className="row">
                         <div className="span_header">Change</div>
-                        <div className="span_data">{toCurrencyString(customerPayment - priceTotal)}</div>
+                        <div className="span_data">{toCurrencyString(customerPayment - orderPriceTotal)}</div>
                     </div>
                 </div>
 

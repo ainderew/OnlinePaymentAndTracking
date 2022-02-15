@@ -9,6 +9,7 @@ import COMPONENT_MODAL_CUSTOM_ORDER from "../../components/modal_custom_order/mo
 import COMPONENT_RECEIPT from "../../components/receipt/receipt.component";
 import COMPONENT_LOADING_SPINNER from "../../components/loading/loading_spinner.component";
 import COMPONENT_SEARCHBAR from "../../components/searchbar/searchbar.component";
+import COMPONENT_MODAL_FINALIZE_ORDER from "../../components/modal_finalize_order/modal_finalize_order.component";
 
 import { fetcherGET, fetcherPOST } from "../../scripts/fetcher";
 import { findRepeat, getOrderPriceTotal, toCurrencyString } from "../../scripts/DOM";
@@ -24,10 +25,12 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
     const [categoriesData, setCategoriesData] = useState([]);
     const [itemData, setItemData] = useState([]);
     const [orderData, setOrderData] = useState([]);
-    const [orderdPriceTotal, setOrderPriceTotal] = useState(0);
+    const [orderPriceTotal, setOrderPriceTotal] = useState(0);
     const [customerPayment, setCustomerpayment] = useState();
+    const [barcodeID, setBarcodeID] = useState();
 
     const [paymentFlag, setPaymentFlag] = useState(false);
+    const [finalizeFlag, setFinalizeFlag] = useState(false);
     const [printFlag, setPrintFlag] = useState(false);
     const [customOrderFlag, setCustomOrderFlag] = useState(false);
     const [categoryLoadingFlag, setCategoryLoadingFlag] = useState(false);
@@ -45,7 +48,7 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
 
     useEffect(() => {
         let PriceTotal = getOrderPriceTotal(orderData)
-        setOrderPriceTotal(toCurrencyString(PriceTotal));
+        setOrderPriceTotal(PriceTotal);
     }, [orderData])
 
 
@@ -58,9 +61,9 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
         })
     }
 
-    const searchItems = (itemName) =>{
+    const searchItems = (itemName) => {
         toggleLoadingFlag();
-        fetcherPOST(process.env.REACT_APP_ROUTE_GET_CATEGORIES_ITEMS, itemName, (data) =>{
+        fetcherPOST(process.env.REACT_APP_ROUTE_GET_CATEGORIES_ITEMS, itemName, (data) => {
             setItemData(data);
             toggleLoadingFlag();
         })
@@ -101,22 +104,30 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
         setCustomOrderFlag(prevState => !prevState)
     }
 
-    const toggleCategoryLoading = () =>{
+    const toggleCategoryLoading = () => {
         setCategoryLoadingFlag(prevState => !prevState)
     }
 
+    const toggleFinalizeModal = () => {
+        setFinalizeFlag(prevState => !prevState);
+    }
     const closeAllModal = () => {
         toggleBlur();
         setPaymentFlag(false);
         setPrintFlag(false);
     }
 
-    const pushOrderToDB = (orderData) =>{
+    const pushOrderToDB = (orderData) => {
         console.log(orderData);
-        fetcherPOST(process.env.REACT_APP_ROUTE_UPLOAD_ORDERS, orderData, (response) =>{
-            console.log(response)
+        fetcherPOST(process.env.REACT_APP_ROUTE_UPLOAD_ORDERS, orderData, (response) => {
+            setBarcodeID(response)
         })
     }
+    
+    // const getBarcodeID = (receivedID) =>{
+    //     setBarcodeID(receivedID);
+    // }
+    
 
 
 
@@ -124,9 +135,10 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
     return (
         <div className="wrapper">
             <COMPONENT_MODAL_CUSTOM_ORDER flag={customOrderFlag} toggleCustomeOrderFlag={toggleCustomeOrderFlag} addItemToOrder={addItemToOrder} />
-            <COMPONENT_MODAL_PAYMENT_DETAILS flag={paymentFlag} togglePaymentModal={togglePaymentModal} toggleReceiptModal={toggleReceiptModal} getCustomerPayment={getCustomerPayment} />
+            <COMPONENT_MODAL_PAYMENT_DETAILS flag={paymentFlag} togglePaymentModal={togglePaymentModal} toggleFinalizeModal={toggleFinalizeModal} getCustomerPayment={getCustomerPayment} />
+            <COMPONENT_MODAL_FINALIZE_ORDER flag={finalizeFlag} togglePaymentModal={togglePaymentModal} toggleReceiptModal={toggleReceiptModal} orderData={orderData} customerPayment={customerPayment} orderPriceTotal={orderPriceTotal} pushOrderToDB={pushOrderToDB}/>
 
-            <COMPONENT_RECEIPT flag={printFlag} orderData={orderData} pushOrderToDB={pushOrderToDB} customerPayment={customerPayment} toggleBlur={toggleBlur} closeAllModals={closeAllModal} clearOrderData={clearOrderData} />
+            <COMPONENT_RECEIPT flag={printFlag} orderData={orderData} pushOrderToDB={pushOrderToDB} customerPayment={customerPayment} toggleBlur={toggleBlur} closeAllModals={closeAllModal} clearOrderData={clearOrderData} orderPriceTotal={orderPriceTotal} barcodeID={barcodeID}/>
             <div className="container_main print_hidden">
                 <div className="div_center">
                     <div className="div_searchbar">
@@ -155,7 +167,7 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
                             problem: the loading component becomes a container due to scss
                         */}
 
-                            {/* <div className="center_left_categories grid_layout">
+                        {/* <div className="center_left_categories grid_layout">
                                 <COMPONENT_CONTAINER_CUSTOM_ORDER toggleCustomeOrderFlag={toggleCustomeOrderFlag} toggleBlur={toggleBlur} />
                                 <COMPONENT_LOADING_SPINNER flag={categoryLoadingFlag} />
                                 {data.map((el, index) => {
@@ -183,7 +195,7 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
                         })}
                     </div>
                     <div onClick={togglePaymentModal} className="div_order_button center">
-                        <span className="span_order_total">{orderdPriceTotal}</span>
+                        <span className="span_order_total">{toCurrencyString(orderPriceTotal)}</span>
                     </div>
                 </div>
             </div>
