@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import "./modal_payment_details.style.scss";
 
-const COMPONENT_PAYMENT_DETAILS = ({ flag, togglePaymentModal, toggleReceiptModal, getCustomerPayment }) => {
+const COMPONENT_PAYMENT_DETAILS = ({ flag, togglePaymentModal, toggleFinalizeModal, getCustomerPayment }) => {
 
     const [amount, setAmount] = useState(0)
 
     const buttonActions = (e) => {
         if (e.key === "Enter") {
-            getCustomerPayment(amount);
-            toggleReceiptModal();
+            submit()
         } else if (e.key === "Escape") {
             togglePaymentModal();
         }
+    }
+
+    const submit = () => {
+        getCustomerPayment(amount);
+        // togglePaymentModal();
+        toggleFinalizeModal();
     }
 
     return (
@@ -22,8 +27,7 @@ const COMPONENT_PAYMENT_DETAILS = ({ flag, togglePaymentModal, toggleReceiptModa
                     <input onKeyDown={buttonActions} onChange={(e) => setAmount(e.target.value)} name="customer_payment" autoFocus={true} type="text" placeholder="Customer Payment" className="input_payment_details" />
                 </div>
                 <button onClick={() => {
-                    getCustomerPayment(amount);
-                    toggleReceiptModal();
+                    submit();
                 }} className="btn_submit_payment_details">Done</button>
 
                 <button onClick={() => {
