@@ -1,0 +1,41 @@
+@import "../../SCSS/variables_colors";
+
+.side_nav {
+    min-height: 100vh;
+    width: 4rem;
+    border-right: 1px solid $color_line;
+    // background: blue;
+    z-index: 2;
+
+    display: grid;
+    grid-template-rows: 6rem 3fr 2fr;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1.1rem;
+
+    .icon {
+        width: 100%;
+    }
+}
+
+.row1 {
+    // outline: 1px solid red;
+    align-items: center;
+    justify-content: center;
+}
+.row2 {
+    // outline: 1px solid green;
+
+    padding: 1.2rem;
+    .link {
+        display: flex;
+        justify-content: center;
+    }
+    .icon {
+        margin-bottom: 2rem;
+    }
+}

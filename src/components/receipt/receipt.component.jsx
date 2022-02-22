@@ -5,13 +5,12 @@ import { toCurrencyString, getDateAndTime } from "../../scripts/DOM";
 
 // IMAGES
 import logo from "../../assets/logo.svg";
-import bc from "../../assets/barcode.png";
 
 // COMPONENT
 import COMPONENT_BARCODE from "../barcode_generator/barcode_generator.component";
 
 
-const COMPONENT_RECEIPT = ({ flag, orderData, pushOrderToDB, customerPayment, closeAllModals, clearOrderData, orderPriceTotal, barcodeID }) => {
+const COMPONENT_RECEIPT = ({ flag, orderData, customerPayment, closeAllModals, clearOrderData, orderPriceTotal, barcodeID }) => {
 
     // const [priceTotal, setPriceTotal] = useState(0)
 
@@ -23,13 +22,17 @@ const COMPONENT_RECEIPT = ({ flag, orderData, pushOrderToDB, customerPayment, cl
     useEffect(() => {
         if (flag) {
             setTimeout(() => {
-                // printOut();
-                // closeAllModals();
+                printOut();
+                closeAllModals();
                 clearOrderData();
             }, 500)
 
         }
     }, [flag])
+
+    useEffect(()=>{
+        console.log(barcodeID)
+    },[barcodeID])
 
 
     const printOut = () => {
@@ -46,7 +49,7 @@ const COMPONENT_RECEIPT = ({ flag, orderData, pushOrderToDB, customerPayment, cl
 
 
     return (
-        (true) ?
+        (flag) ?
         // (true) ?
             <div className="div_receipt">
                 <img src={logo} alt="logo" className="img_logo" />

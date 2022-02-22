@@ -9,16 +9,19 @@ const COMPONENT_MODAL_FINALIZE_ORDER = ({ flag, togglePaymentModal, toggleReceip
 
     const onAccept = () =>{
         pushOrderToDB(orderData);
-        toggleReceiptModal();
+        
+        setTimeout(()=>{
+            toggleReceiptModal();
+        },1000)
     }
     const onCancel = () =>{
 
     }
     
-
+    
     return (
         (flag)
-            ? <div className={Styles.div_main}>
+            ? <div className={`${Styles.div_main} print_hidden`}>
                 <table className={Styles.table}>
                     <thead>
                         <tr>
