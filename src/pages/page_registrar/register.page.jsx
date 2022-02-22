@@ -115,6 +115,7 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
         toggleBlur();
         setPaymentFlag(false);
         setPrintFlag(false);
+        setFinalizeFlag(false);
     }
 
     const pushOrderToDB = (orderData) => {
