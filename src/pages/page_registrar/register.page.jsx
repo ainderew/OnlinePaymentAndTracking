@@ -189,7 +189,11 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
                     </div>
                 </div>
                 <div className="div_order">
-                    <div className="div_order_header"></div>
+                    <div className="div_order_header">
+                        <button className="btn_scan_barcode">TechPal</button>
+
+                    </div>
+
                     <div className="div_order_main">
                         {orderData.map((el, index) => {
                             return < COMPONENT_CONTAINER_ORDER_ITEM itemData={el} />
