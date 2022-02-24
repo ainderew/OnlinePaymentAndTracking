@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import COMPONENT_CONTAINER_CATEGORY from "../../components/container_category/container_category.component"
 import COMPONENT_CONTAINER_ITEM from "../../components/container_item/container_item.component";
@@ -28,6 +28,7 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
     const [orderPriceTotal, setOrderPriceTotal] = useState(0);
     const [customerPayment, setCustomerpayment] = useState();
     const [barcodeID, setBarcodeID] = useState();
+    const [itemBarcode, setItemBarcode] = useState()
 
     const [paymentFlag, setPaymentFlag] = useState(false);
     const [finalizeFlag, setFinalizeFlag] = useState(false);
@@ -59,6 +60,17 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
             setItemData(data)
             toggleLoadingFlag();
         })
+    }
+
+    const getItemUsingBarcode = (e, barcode) => {
+        if (e.key === "Enter") {
+            fetcherPOST(process.env.REACT_APP_ROUTE_GET_BARCODE_ITEM, barcode, (itemData) => {
+                console.log(itemData[0])
+                addItemToOrder(itemData[0]);
+                setItemBarcode("")
+            })
+        }
+
     }
 
     const searchItems = (itemName) => {
@@ -124,11 +136,15 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
             setBarcodeID(response)
         })
     }
+
     
+    const onChange = (e,setter) =>{
+        setter(e.target.value)
+    }
     // const getBarcodeID = (receivedID) =>{
     //     setBarcodeID(receivedID);
     // }
-    
+
 
 
 
@@ -137,9 +153,9 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
         <div className="wrapper">
             <COMPONENT_MODAL_CUSTOM_ORDER flag={customOrderFlag} toggleCustomeOrderFlag={toggleCustomeOrderFlag} addItemToOrder={addItemToOrder} />
             <COMPONENT_MODAL_PAYMENT_DETAILS flag={paymentFlag} togglePaymentModal={togglePaymentModal} toggleFinalizeModal={toggleFinalizeModal} getCustomerPayment={getCustomerPayment} />
-            <COMPONENT_MODAL_FINALIZE_ORDER flag={finalizeFlag} togglePaymentModal={togglePaymentModal} toggleReceiptModal={toggleReceiptModal} orderData={orderData} customerPayment={customerPayment} orderPriceTotal={orderPriceTotal} pushOrderToDB={pushOrderToDB}/>
+            <COMPONENT_MODAL_FINALIZE_ORDER flag={finalizeFlag} togglePaymentModal={togglePaymentModal} toggleReceiptModal={toggleReceiptModal} orderData={orderData} customerPayment={customerPayment} orderPriceTotal={orderPriceTotal} pushOrderToDB={pushOrderToDB} />
 
-            <COMPONENT_RECEIPT flag={printFlag} orderData={orderData} pushOrderToDB={pushOrderToDB} customerPayment={customerPayment} toggleBlur={toggleBlur} closeAllModals={closeAllModal} clearOrderData={clearOrderData} orderPriceTotal={orderPriceTotal} barcodeID={barcodeID}/>
+            <COMPONENT_RECEIPT flag={printFlag} orderData={orderData} pushOrderToDB={pushOrderToDB} customerPayment={customerPayment} toggleBlur={toggleBlur} closeAllModals={closeAllModal} clearOrderData={clearOrderData} orderPriceTotal={orderPriceTotal} barcodeID={barcodeID} />
             <div className="container_main print_hidden">
                 <div className="div_center">
                     <div className="div_searchbar">
@@ -189,7 +205,9 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
                     </div>
                 </div>
                 <div className="div_order">
+
                     <div className="div_order_header">
+                        <input onChange={(e)=>{onChange(e,setItemBarcode)}} onKeyDown={(e)=>{getItemUsingBarcode(e,itemBarcode)}} type="text" className="" id="input_barcode" value={itemBarcode} />
                         <button className="btn_scan_barcode">TechPal</button>
 
                     </div>
