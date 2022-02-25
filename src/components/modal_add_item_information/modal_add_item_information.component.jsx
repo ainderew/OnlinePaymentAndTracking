@@ -45,6 +45,10 @@ const COMPONENT_MODAL_ADD_ITEM_INFORMATION = ({ flag, toggleModalInfoFlag, toggl
     }
 
     const submit = () =>{
+        let LINK = process.env.REACT_APP_ROUTE_ADD_ITEMS
+        if (itemData != null){ // if item data is not null edit Route is set as LINK
+            LINK = process.env.REACT_APP_ROUTE_EDIT_ITEM;
+        }
         const data = {
             name: name,
             stockQty: quantity,
@@ -55,7 +59,7 @@ const COMPONENT_MODAL_ADD_ITEM_INFORMATION = ({ flag, toggleModalInfoFlag, toggl
             barcode: barcode,
             itemID: itemID
         }
-        fetcherPOST(process.env.REACT_APP_ROUTE_EDIT_ITEM, data, (res)=>{
+        fetcherPOST(LINK, data, (res)=>{
             console.log(res)
         })
         toggleModalInfoFlag();
