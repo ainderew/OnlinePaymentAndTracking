@@ -115,6 +115,7 @@ const PAGE_INVENTORY = ({ toggleBlur, toggleLoadingFlag, loadingFlag }) => {
                <th className={Styles.col_header_name}>Name</th>
                <th className={Styles.col_header_wPrice}>Wholesale Price</th>
                <th className={Styles.col_header_sPrice}>Store Price</th>
+               <th className={Styles.col_header_qty}>In Stock</th>
                <th className={Styles.col_header_actions}>Actions</th>
              </tr>
            </thead>
@@ -127,6 +128,7 @@ const PAGE_INVENTORY = ({ toggleBlur, toggleLoadingFlag, loadingFlag }) => {
                    <td>{el.name}</td>
                    <td>{toCurrencyString(el.wholesalePrice)}</td>
                    <td>{toCurrencyString(el.price)}</td>
+                   <td>{el.stockQty}</td>
                    <td className={Styles.col_actions}>
                      <button onClick={()=>{
                          setDataForItemEdit(index)
