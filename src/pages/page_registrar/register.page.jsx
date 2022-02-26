@@ -21,6 +21,8 @@ import "./register.style.scss";
 import "../../SCSS/global.style.scss"
 
 const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
+    const REF_input_barcode = useRef(null)
+
     // useStates
     const [categoriesData, setCategoriesData] = useState([]);
     const [itemData, setItemData] = useState([]);
@@ -45,6 +47,10 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
             toggleCategoryLoading();
         });
 
+        // const interval = setInterval(()=>{
+        //     REF_input_barcode.current.focus();
+        // },5000)
+        // console.log(REF_input_barcode.current);
     }, [])
 
     useEffect(() => {
@@ -141,9 +147,13 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
     const onChange = (e,setter) =>{
         setter(e.target.value)
     }
-    // const getBarcodeID = (receivedID) =>{
-    //     setBarcodeID(receivedID);
-    // }
+
+    const focusInputBarcode = () =>{
+        REF_input_barcode.current.focus();
+    }
+   
+
+
 
 
 
@@ -207,8 +217,8 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
                 <div className="div_order">
 
                     <div className="div_order_header">
-                        <input onChange={(e)=>{onChange(e,setItemBarcode)}} onKeyDown={(e)=>{getItemUsingBarcode(e,itemBarcode)}} type="text" className="" id="input_barcode" value={itemBarcode} />
-                        <button className="btn_scan_barcode">TechPal</button>
+                        <input ref={REF_input_barcode} onChange={(e)=>{onChange(e,setItemBarcode)}} onKeyDown={(e)=>{getItemUsingBarcode(e,itemBarcode)}} type="text" className="" id="input_barcode" value={itemBarcode} />
+                        <button onClick={focusInputBarcode} className="btn_scan_barcode">TechPal</button>
 
                     </div>
 
