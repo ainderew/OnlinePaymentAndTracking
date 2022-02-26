@@ -47,7 +47,29 @@ export const getDateAndTime = () => {
 
   return `${monthName} ${day}, ${year} ${hour}:${min}`;
   
+}
 
+export const mergeSortTopDown = (array) => {
+  if (array.length <= 1) {
+      return array;
+  }
 
+  const middle = Math.floor(array.length / 2)
+  const left = array.slice(0, middle);
+  const right = array.slice(middle);
 
+  return mergeTopDown(mergeSortTopDown(left), mergeSortTopDown(right))
+}
+
+const mergeTopDown = (left, right) => {
+  let temp = []
+
+  while (left.length && right.length) {
+      if (left[0][0].orderID<right[0][0].orderID) {
+          temp.push(left.shift());
+      } else {
+          temp.push(right.shift());
+      }
+  }
+  return temp.concat(left.slice()).concat(right.slice())
 }
