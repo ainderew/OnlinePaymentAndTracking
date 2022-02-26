@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Styles from "./report.module.scss";
 
 import { fetcherGET } from "../../scripts/fetcher";
-import { toCurrencyString } from "../../scripts/DOM";
+import { toCurrencyString, mergeSortTopDown } from "../../scripts/DOM";
 
 import COMPONENT_SEARCHBAR from "../../components/searchbar/searchbar.component";
 
@@ -17,7 +17,8 @@ const PAGE_REPORT = () => {
     fetcherGET(
       `${process.env.REACT_APP_ROUTE_GET_ORDERS}/${mode}`,
       (fetchedData) => {
-        setDataSet(fetchedData);
+        let sortedDataSet = mergeSortTopDown(fetchedData)
+        setDataSet(sortedDataSet);
         calculateTotalRevenueAndTotalProfit(fetchedData);
       }
     );
@@ -30,7 +31,7 @@ const PAGE_REPORT = () => {
       profit: 0,
     };
 
-    array.map((el) => {
+    array.filter(el=>el.price != null).map((el) => {
       data.revenue += el.price * el.orderedQty;
       data.cost += el.wholesalePrice * el.orderedQty;
     });
@@ -46,7 +47,7 @@ const PAGE_REPORT = () => {
     dataSet.map((order) => {
       let itemCost = 0;
       let itemRevenue = 0;
-      order.map((item) => {
+      order.filter(el=>el.price != null).map((item) => {
         itemCost = item.wholesalePrice * item.orderedQty;
         itemRevenue = item.price * item.orderedQty;
 
@@ -109,7 +110,7 @@ const PAGE_REPORT = () => {
                 {dataSet.map((order,index) => {
                   let businessData = calculateRevenueAndProfit(order);
                   let orderID = order[0].orderID; //all of the items inside the order array have the same orderID so we just get the first items orderID
-                  let date = order[0].date;
+                  let date = order[1].date;
 
                   return (
                     <tr onClick={()=>getTableRowData(index)} className={Styles.table_row}>
