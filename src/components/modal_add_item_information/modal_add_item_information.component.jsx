@@ -12,6 +12,7 @@ const COMPONENT_MODAL_ADD_ITEM_INFORMATION = ({ flag, toggleModalInfoFlag, toggl
     const [categoryID, setCategoryID] = useState("");
     const [barcode, setBarcode] = useState("");
     const [categoryOptions, setCategoryOptions] = useState([]);
+    const [itemID, setItemID] = useState("")
 
 
     useEffect(()=>{
@@ -29,6 +30,7 @@ const COMPONENT_MODAL_ADD_ITEM_INFORMATION = ({ flag, toggleModalInfoFlag, toggl
             setSPrice(itemData.price)
             setBrand(itemData.brand)
             setBarcode(itemData.barcode);
+            setItemID(itemData.ID)
         }else{
             console.log("null")
         }
@@ -43,6 +45,10 @@ const COMPONENT_MODAL_ADD_ITEM_INFORMATION = ({ flag, toggleModalInfoFlag, toggl
     }
 
     const submit = () =>{
+        let LINK = process.env.REACT_APP_ROUTE_ADD_ITEMS
+        if (itemData != null){ // if item data is not null edit Route is set as LINK
+            LINK = process.env.REACT_APP_ROUTE_EDIT_ITEM;
+        }
         const data = {
             name: name,
             stockQty: quantity,
@@ -50,9 +56,10 @@ const COMPONENT_MODAL_ADD_ITEM_INFORMATION = ({ flag, toggleModalInfoFlag, toggl
             price: sPrice,
             brand: brand,
             categoryID: categoryID,
-            barcode: barcode
+            barcode: barcode,
+            itemID: itemID
         }
-        fetcherPOST(process.env.REACT_APP_ROUTE_ADD_ITEMS, data, (res)=>{
+        fetcherPOST(LINK, data, (res)=>{
             console.log(res)
         })
         toggleModalInfoFlag();

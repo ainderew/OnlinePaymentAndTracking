@@ -24,8 +24,8 @@
     }
 }
 
-.div_searchbar{
-    padding: .5rem;
+.div_searchbar {
+    padding: 0.5rem;
 }
 
 .div_headers {
@@ -58,7 +58,7 @@
         gap: 1rem;
     }
 }
-.center_left_categories::-webkit-scrollbar{
+.center_left_categories::-webkit-scrollbar {
     display: none;
 }
 
@@ -77,31 +77,53 @@
     display: grid;
     grid-template-rows: 6rem 1fr 5rem;
 
-    .div_oder_header,.div_order_main,.div_order_button{
-
+    .div_oder_header,
+    .div_order_main,
+    .div_order_button {
     }
 
-    .div_order_header{
-        .btn_scan_barcode{
+    .div_order_header {
+        .btn_scan_barcode {
             width: 100%;
             height: 100%;
             border: none;
-            background: $primary;
+            background: white;
+            position: relative;
+
+            color: black;
+        }
+        .btn_scan_barcode:hover,.btn_scan_barcode:active{
+            background-color: grey;
+            color: grey;
+        }
+        .btn_scan_barcode:hover::after,.btn_scan_barcode:active::after {
+            // outline: 1px solid black;
+            // transform: scale(.8);
+            content: "SCAN BARCODE";
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform: translate(-50%,50%);
 
             color: white;
         }
+
+        #input_barcode {
+            position: fixed;
+            top: -50%;
+        }
     }
 
-    .div_order_main{
+    .div_order_main {
         display: grid;
         grid-template-rows: repeat(auto-fill, minmax(5rem, 1fr));
         gap: 1rem;
-        
+
+        overflow-y: auto;
     }
 
-    .div_order_button{
+    .div_order_button {
         background-color: green;
         color: white;
     }
-
 }

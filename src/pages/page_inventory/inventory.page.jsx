@@ -48,6 +48,7 @@ const PAGE_INVENTORY = ({ toggleBlur, toggleLoadingFlag, loadingFlag }) => {
   };
   const setDataForItemEdit = (index) =>{
     setItemData(itemsArray[index]);
+    console.log(itemsArray[index])
   }
 
   return (
