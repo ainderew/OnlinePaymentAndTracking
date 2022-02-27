@@ -1,0 +1,36 @@
+.div_main{
+    width: 30%;
+    // height: 30%;
+    background: white;
+    padding: 1rem;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    outline: 1px solid black;
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.span_header{
+    font-size: 1.2rem;
+}
+.span_data{
+    font-size: 4rem;
+    font-weight: 800;
+}
+
+.input_qty{
+    height: 3rem;
+    margin-top: 1rem;
+    font-size: 2rem;
+    outline: 1px solid black;
+    padding: 0 0 0 1rem;
+}
+.btn_delete{
+    height: 3rem;
+    margin-top: 1rem;
+}

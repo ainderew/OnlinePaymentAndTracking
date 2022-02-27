@@ -105,4 +105,22 @@
       transition: 100ms linear;
     // background: $color_line_2
   }
+
+
+  .table_col_orderID{
+    width: 15%;
+  }
+  .table_col_Date{
+    width: 20%;
+  }
+  .table_col_Time{
+    width: 15%;
+  }
+  .table_col_Revenue{
+    width: 25%;
+    
+  }
+  .table_col_Profit{
+    width: 25%;
+  }
 }

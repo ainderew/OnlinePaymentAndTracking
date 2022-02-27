@@ -100,9 +100,10 @@ const PAGE_REPORT = () => {
               <thead className={Styles.table_header}>
                 <tr>
                   <th className={Styles.table_col_orderID} >Order ID</th>
-                  <th>Date</th>
-                  <th>Total Revenue</th>
-                  <th>Profit</th>
+                  <th className={Styles.table_col_Date} >Date</th>
+                  <th className={Styles.table_col_Time} >Time</th>
+                  <th className={Styles.table_col_Revenue} >Total Revenue</th>
+                  <th className={Styles.table_col_Profit} >Profit</th>
                 </tr>
               </thead>
 
@@ -110,14 +111,16 @@ const PAGE_REPORT = () => {
                 {dataSet.map((order,index) => {
                   let businessData = calculateRevenueAndProfit(order);
                   let orderID = order[0].orderID; //all of the items inside the order array have the same orderID so we just get the first items orderID
-                  let date = order[1].date;
+                  let date = order[0].date;
+                  let time = order[0].time;
 
                   return (
                     <tr onClick={()=>getTableRowData(index)} className={Styles.table_row}>
-                      <td className={Styles.table_col_orderID}>{orderID}</td>
-                      <td>{date}</td>
-                      <td>{toCurrencyString(businessData.revenue)}</td>
-                      <td>{toCurrencyString(businessData.profit)}</td>
+                      <td className={Styles.table_col_orderID} >{orderID}</td>
+                      <td className={Styles.table_col_Date} >{date}</td>
+                      <td className={Styles.table_col_Time} >{time}</td>
+                      <td className={Styles.table_col_Revenue} >{toCurrencyString(businessData.revenue)}</td>
+                      <td className={Styles.table_col_Profit} >{toCurrencyString(businessData.profit)}</td>
                     </tr>
                   );
                 })}
