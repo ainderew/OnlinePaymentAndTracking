@@ -30,7 +30,7 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
     const [orderData, setOrderData] = useState([]);
     const [orderPriceTotal, setOrderPriceTotal] = useState(0);
     const [customerPayment, setCustomerpayment] = useState();
-    const [barcodeID, setBarcodeID] = useState();
+    const [ReceiptBarcodeID, setReceiptBarcodeID] = useState();
     const [itemBarcode, setItemBarcode] = useState();
     const [selectedOrderItem, setSelectedOrderItem] = useState();
     const [orderItemSelectedIndex, setOrderItemSelectedIndex] = useState();
@@ -73,15 +73,15 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
             fetcherPOST(process.env.REACT_APP_ROUTE_GET_BARCODE_ITEM, barcode, (itemData) => {
                 console.log(itemData[0])
                 addItemToOrder(itemData[0]);
-                setItemBarcode("")
             })
+            setItemBarcode("")
         }
 
     }
 
     const searchItems = (itemName) => {
         toggleLoadingFlag();
-        fetcherPOST(process.env.REACT_APP_ROUTE_GET_CATEGORIES_ITEMS, itemName, (data) => {
+        fetcherPOST(process.env.REACT_APP_ROUTE_GET_NAME_ITEM, itemName, (data) => {
             setItemData(data);
             toggleLoadingFlag();
         })
@@ -143,7 +143,7 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
     const pushOrderToDB = (orderData) => {
         console.log(orderData);
         fetcherPOST(process.env.REACT_APP_ROUTE_UPLOAD_ORDERS, orderData, (response) => {
-            setBarcodeID(response)
+            setReceiptBarcodeID(response)
         })
     }
 
@@ -170,7 +170,7 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
         let tempArray = [...orderData];
         tempArray.splice(index, 1);
         setOrderData(tempArray) // We use a tempArray to modify the orderData array before using it in setOrderData() to trigger useEffect
-                                // because directly modifying the orderData array results in bugs. (useEffect can't pick up changes) 
+        // because directly modifying the orderData array results in bugs. (useEffect can't pick up changes) 
 
         toggleEditOrderItemModal();
     }
@@ -191,7 +191,7 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
                 ? <COMPONENT_MODAL_ORDER_ITEM itemData={selectedOrderItem} flag={editOrderItemFlag} FUNCTION_toggleFlag={toggleEditOrderItemModal} FUNCTION_submit={onSubmitEditOrderItem} FUNCTION_removeItem={removeOrderItem} index={orderItemSelectedIndex} />
                 : ""
             }
-            <COMPONENT_RECEIPT flag={printFlag} orderData={orderData} pushOrderToDB={pushOrderToDB} customerPayment={customerPayment} toggleBlur={toggleBlur} closeAllModals={closeAllModal} clearOrderData={clearOrderData} orderPriceTotal={orderPriceTotal} barcodeID={barcodeID} />
+            <COMPONENT_RECEIPT flag={printFlag} orderData={orderData} pushOrderToDB={pushOrderToDB} customerPayment={customerPayment} toggleBlur={toggleBlur} closeAllModals={closeAllModal} clearOrderData={clearOrderData} orderPriceTotal={orderPriceTotal} ReceiptBarcodeID={ReceiptBarcodeID} />
             <div className="container_main print_hidden">
                 <div className="div_center">
                     <div className="div_searchbar">

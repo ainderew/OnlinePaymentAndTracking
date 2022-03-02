@@ -10,7 +10,7 @@ const COMPONENT_SEARCHBAR = ({searchItems}) =>{
 
     const enterPressed = (e) =>{
         if(e.key === "Enter"){
-            searchItems(searchQuery)
+            searchItems(searchQuery);
             // console.log(searchQuery)
         }
     }

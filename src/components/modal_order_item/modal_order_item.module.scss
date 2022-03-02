@@ -30,7 +30,13 @@
     outline: 1px solid black;
     padding: 0 0 0 1rem;
 }
-.btn_delete{
+.btn_delete, .btn_cancel{
     height: 3rem;
     margin-top: 1rem;
+}
+
+.btn_delete{
+    background: rgb(245, 49, 49);
+    border: none;
+    color: white;
 }
