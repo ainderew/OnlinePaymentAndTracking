@@ -27,7 +27,7 @@ const COMPONENT_MODAL_ORDER_ITEM = ({ itemData, flag, FUNCTION_toggleFlag, FUNCT
             {/* <input className={Styles.input_qty} onKeyDown={enterPressed} onChange={(e) => setter(e)} type="number" value={itemData.orderQty} /> */}
 
             <button onClick={()=>FUNCTION_removeItem(index)} className={Styles.btn_delete}>Remove Item</button>
-            <button onClick={FUNCTION_toggleFlag} className={Styles.btn_delete}>Cancel</button>
+            <button onClick={FUNCTION_toggleFlag} className={Styles.btn_cancel}>Cancel</button>
         </div>
 
     )

@@ -4,6 +4,9 @@ import Styles from "./inventory.module.scss";
 import { fetcherGET } from "../../scripts/fetcher";
 import { toCurrencyString } from "../../scripts/DOM";
 
+
+import { fetcherPOST } from "../../scripts/fetcher";
+
 // IMAGES
 import IMG_search from "../../assets/search.svg";
 import IMG_refresh from "../../assets/refresh.svg";
@@ -30,12 +33,12 @@ const PAGE_INVENTORY = ({ toggleBlur, toggleLoadingFlag, loadingFlag }) => {
   const [barcodeFlag, setBarcodeFlag] = useState(false);
   const [modalInfoFlag, setModalInfoFlag] = useState(false);
 
-  const checkDBItems = () =>{
+  const checkDBItems = () => {
     toggleLoadingFlag();
     fetcherGET(process.env.REACT_APP_ROUTE_GET_ALL_ITEMS, (response) => {
-        setItemsArray(response);
-        toggleLoadingFlag();
-      });
+      setItemsArray(response);
+      toggleLoadingFlag();
+    });
   }
   const toggleSearchBar = () => {
     setSearchToggle((prevState) => !prevState);
@@ -46,9 +49,17 @@ const PAGE_INVENTORY = ({ toggleBlur, toggleLoadingFlag, loadingFlag }) => {
   const toggleModalInfoFlag = () => {
     setModalInfoFlag((prevState) => !prevState);
   };
-  const setDataForItemEdit = (index) =>{
+  const setDataForItemEdit = (index) => {
     setItemData(itemsArray[index]);
     console.log(itemsArray[index])
+  }
+
+  const searchItems = (itemName) => {
+    toggleLoadingFlag();
+    fetcherPOST(process.env.REACT_APP_ROUTE_GET_NAME_ITEM, itemName, (data) => {
+      setItemsArray(data);
+      toggleLoadingFlag();
+    })
   }
 
   return (
@@ -75,7 +86,7 @@ const PAGE_INVENTORY = ({ toggleBlur, toggleLoadingFlag, loadingFlag }) => {
         <div className={Styles.div_top_bar}>
           <div className={Styles.div_searchbar}>
             {searchToggle ? (
-              <COMPONENT_SEARCHBAR />
+              <COMPONENT_SEARCHBAR searchItems={searchItems} />
             ) : (
               <button onClick={toggleSearchBar} className={Styles.btn_search}>
                 <img className={Styles.icon_search} src={IMG_search} alt="" />
@@ -106,55 +117,56 @@ const PAGE_INVENTORY = ({ toggleBlur, toggleLoadingFlag, loadingFlag }) => {
             </button>
           </div>
         </div>
-        <div className={Styles.div_table}>
-            {(loadingFlag)
-           ?<COMPONENT_LOADING_SPINNER flag={loadingFlag} /> :<table className={Styles.table}>
-           <thead>
-             <tr className={Styles.table_header}>
-               <th className={Styles.col_header_id}>ID</th>
-               <th className={Styles.col_header_name}>Name</th>
-               <th className={Styles.col_header_wPrice}>Wholesale Price</th>
-               <th className={Styles.col_header_sPrice}>Store Price</th>
-               <th className={Styles.col_header_qty}>In Stock</th>
-               <th className={Styles.col_header_actions}>Actions</th>
-             </tr>
-           </thead>
 
-            <tbody>
-             {itemsArray.map((el,index) => {
-               return (
-                 <tr className={Styles.table_row}>
-                   <td className={Styles.col_id}>{el.ID}</td>
-                   <td>{el.name}</td>
-                   <td>{toCurrencyString(el.wholesalePrice)}</td>
-                   <td>{toCurrencyString(el.price)}</td>
-                   <td>{el.stockQty}</td>
-                   <td className={Styles.col_actions}>
-                     <button onClick={()=>{
-                         setDataForItemEdit(index)
-                         toggleBlur();
-                         toggleModalInfoFlag();
-                     }} className={Styles.btn_action}>
-                       <img
-                         className={Styles.img_action}
-                         src={IMG_edit}
-                         alt="edit"
-                       />
-                     </button>
-                     <button className={Styles.btn_action}>
-                       <img
-                         className={Styles.img_action}
-                         src={IMG_delete}
-                         alt="delete"
-                       />
-                     </button>
-                   </td>
-                 </tr>
-               );
-             })}
-           </tbody>
-         </table>}
-          
+        <div className={Styles.div_table}>
+          {(loadingFlag)
+            ? <COMPONENT_LOADING_SPINNER flag={loadingFlag} /> : <table className={Styles.table}>
+              <thead>
+                <tr className={Styles.table_header}>
+                  <th className={Styles.col_header_id}>ID</th>
+                  <th className={Styles.col_header_name}>Name</th>
+                  <th className={Styles.col_header_wPrice}>Wholesale Price</th>
+                  <th className={Styles.col_header_sPrice}>Store Price</th>
+                  <th className={Styles.col_header_qty}>In Stock</th>
+                  <th className={Styles.col_header_actions}>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {itemsArray.map((el, index) => {
+                  return (
+                    <tr className={Styles.table_row}>
+                      <td className={Styles.col_id}>{el.ID}</td>
+                      <td>{el.name}</td>
+                      <td>{toCurrencyString(el.wholesalePrice)}</td>
+                      <td>{toCurrencyString(el.price)}</td>
+                      <td>{el.stockQty}</td>
+                      <td className={Styles.col_actions}>
+                        <button onClick={() => {
+                          setDataForItemEdit(index)
+                          toggleBlur();
+                          toggleModalInfoFlag();
+                        }} className={Styles.btn_action}>
+                          <img
+                            className={Styles.img_action}
+                            src={IMG_edit}
+                            alt="edit"
+                          />
+                        </button>
+                        <button className={Styles.btn_action}>
+                          <img
+                            className={Styles.img_action}
+                            src={IMG_delete}
+                            alt="delete"
+                          />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>}
+
         </div>
       </div>
     </div>
