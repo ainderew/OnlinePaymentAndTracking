@@ -10,7 +10,7 @@ import logo from "../../assets/logo.svg";
 import COMPONENT_BARCODE from "../barcode_generator/barcode_generator.component";
 
 
-const COMPONENT_RECEIPT = ({ flag, orderData, customerPayment, closeAllModals, clearOrderData, orderPriceTotal, barcodeID }) => {
+const COMPONENT_RECEIPT = ({ flag, orderData, customerPayment, closeAllModals, clearOrderData, orderPriceTotal, ReceiptBarcodeID }) => {
 
     // const [priceTotal, setPriceTotal] = useState(0)
 
@@ -31,8 +31,8 @@ const COMPONENT_RECEIPT = ({ flag, orderData, customerPayment, closeAllModals, c
     }, [flag])
 
     useEffect(()=>{
-        console.log(barcodeID)
-    },[barcodeID])
+        console.log(ReceiptBarcodeID)
+    },[ReceiptBarcodeID])
 
 
     const printOut = () => {
@@ -57,7 +57,7 @@ const COMPONENT_RECEIPT = ({ flag, orderData, customerPayment, closeAllModals, c
                 <div className="div_receipt_info">
                     <span className="span_date">{getDateAndTime()}</span>
                     {/* <img src={bc} alt="" className="img_barcode" /> */}
-                    <COMPONENT_BARCODE barcodeID = {barcodeID} />
+                    <COMPONENT_BARCODE barcodeID = {ReceiptBarcodeID} />
 
                 </div>
                 <table className="table">
