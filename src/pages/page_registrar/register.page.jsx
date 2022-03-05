@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, Fragment } from "react";
 
 import COMPONENT_CONTAINER_CATEGORY from "../../components/container_category/container_category.component"
 import COMPONENT_CONTAINER_ITEM from "../../components/container_item/container_item.component";
@@ -206,15 +206,21 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
                         </div>
                     </div>
                     <div className="div_center_main">
-                        {(categoryLoadingFlag)
-                            ? <COMPONENT_LOADING_SPINNER flag={categoryLoadingFlag} />
-                            : <div className="center_left_categories grid_layout">
-                                <COMPONENT_CONTAINER_CUSTOM_ORDER toggleCustomeOrderFlag={toggleCustomeOrderFlag} toggleBlur={toggleBlur} />
-                                {categoriesData.map((el, index) => {
-                                    return <COMPONENT_CONTAINER_CATEGORY ParentData={el} index={index} getItemFetchFunction={getItems} toggleLoadingFlag={toggleLoadingFlag} />
-                                })}
-                            </div>
-                        }
+
+
+                        <div className="center_left_categories grid_layout">
+                            {(categoryLoadingFlag)
+                                ? <COMPONENT_LOADING_SPINNER flag={categoryLoadingFlag} />
+                                : <Fragment>
+                                    <COMPONENT_CONTAINER_CUSTOM_ORDER toggleCustomeOrderFlag={toggleCustomeOrderFlag} toggleBlur={toggleBlur} />
+                                    {categoriesData.map((el, index) => {
+                                        return <COMPONENT_CONTAINER_CATEGORY ParentData={el} index={index} getItemFetchFunction={getItems} toggleLoadingFlag={toggleLoadingFlag} />
+                                    })}
+                                </Fragment>
+                            }
+
+                        </div>
+
 
                         {/* even if categories still fetching shows custom order container
                             problem: the loading component becomes a container due to scss
@@ -229,15 +235,18 @@ const PAGE_REGISTER = ({ toggleBlur, loadingFlag, toggleLoadingFlag }) => {
                             </div> */}
 
 
-                        {(loadingFlag)
-                            ? <COMPONENT_LOADING_SPINNER flag={loadingFlag} />
-                            : <div className="center_right_items">
 
-                                {itemData.map((el, index) => {
+
+                        <div className="center_right_items">
+
+                            {(loadingFlag)
+                                ? <COMPONENT_LOADING_SPINNER flag={loadingFlag} />
+                                : itemData.map((el, index) => {
                                     return <COMPONENT_CONTAINER_ITEM data={el} addItemToOrderFunction={addItemToOrder} />
                                 })}
-                            </div>
-                        }
+
+                        </div>
+
                     </div>
                 </div>
                 <div className="div_order">

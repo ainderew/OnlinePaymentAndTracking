@@ -16,6 +16,39 @@
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 100%;
   padding: 0.5rem;
+
+  .div_settings {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 1rem;
+
+    .span_settings {
+      font-size: 0.8rem;
+    }
+
+    .input_settings,
+    .btn_settings {
+      background: rgb(221, 221, 221);
+      height: 100%;
+      padding: 0 0.5rem;
+      border: none;
+    }
+
+    .input_settings {
+      width: 8rem;
+    }
+
+    .btn_settings {
+      min-width: 6rem;
+    }
+
+    .btn_settings:focus,
+    .input_settings:focus {
+      border: none;
+      outline: 1px solid $primary;
+    }
+  }
 }
 
 .div_content {
@@ -91,6 +124,11 @@
     background: rgb(226, 226, 226);
     height: 2rem;
   }
+  .table_body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
   td,
   th {
     padding: 0 1rem;
@@ -100,27 +138,36 @@
     background: rgba(191, 191, 191, 0.138);
     height: 1.5rem;
   }
-  .table_row:hover{
-      transform: scale(1.01);
-      transition: 100ms linear;
+  .table_row:hover {
+    transform: scale(1.01);
+    transition: 100ms linear;
     // background: $color_line_2
   }
 
-
-  .table_col_orderID{
+  .table_col_orderID {
     width: 15%;
   }
-  .table_col_Date{
+  .table_col_Date {
     width: 20%;
   }
-  .table_col_Time{
+  .table_col_Time {
     width: 15%;
   }
-  .table_col_Revenue{
+  .table_col_Revenue {
     width: 25%;
-    
   }
-  .table_col_Profit{
+  .table_col_Profit {
     width: 25%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  // for mobile
+  .div_content {
+    grid-template-columns: 1fr;
+
+    .div_right{
+      display: none;
+    }
   }
 }

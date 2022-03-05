@@ -1,6 +1,6 @@
 
 
-
+@import "./variables_colors";
 
 * {
     margin: 0;
@@ -35,6 +35,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.active{
+  background-color: $primary !important;
+  color: white;
 }
 
 
