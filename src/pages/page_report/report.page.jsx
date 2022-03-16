@@ -37,7 +37,7 @@ const PAGE_REPORT = () => {
 
   useEffect(() => {
     if (initialRender.current) {
-      initialRender.current = false;
+      initialRender.current = false; //Checks if it's the first render, if true then it does not reload the data else reloads data with the current filter inside the useState
       console.log("initial")
     } else {
       initDataSet(`${process.env.REACT_APP_ROUTE_GET_ORDERS_CURRENT}${filterByCurrent}`)
